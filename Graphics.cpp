@@ -253,7 +253,7 @@ void Graphics::Draw(float angle, float x, float z)
 		float a;
 	};
 
-	const std::vector<Vertex> vertices=
+	const std::vector<Vertex> vertices =
 	{
 		{-1.0f,-1.0f,-1.0f},
 		{ 1.0f,-1.0f,-1.0f},
@@ -271,7 +271,7 @@ void Graphics::Draw(float angle, float x, float z)
 	wrl::ComPtr<ID3D11Buffer> pVertexBuffer;
 
 	D3D11_BUFFER_DESC bd = {};
-	bd.ByteWidth = UINT( sizeof( Vertex ) * vertices.size() );
+	bd.ByteWidth = UINT(sizeof(Vertex) * vertices.size());
 	bd.Usage = D3D11_USAGE_DEFAULT;
 	bd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 	bd.CPUAccessFlags = 0u;
@@ -289,7 +289,7 @@ void Graphics::Draw(float angle, float x, float z)
 	pContext->IASetVertexBuffers(0u, 1u, pVertexBuffer.GetAddressOf(), &stride, &offset);
 
 	// create index buffer
-	const unsigned short indices[] =
+	const std::vector<unsigned short> indices =
 	{
 		0,2,1, 2,3,1,
 		1,3,5, 3,7,5,
@@ -301,7 +301,7 @@ void Graphics::Draw(float angle, float x, float z)
 	wrl::ComPtr<ID3D11Buffer> pIndexBuffer;
 
 	D3D11_BUFFER_DESC ibd = {};
-	ibd.ByteWidth = sizeof(indices);
+	ibd.ByteWidth = UINT(sizeof(unsigned short) * indices.size());
 	ibd.Usage = D3D11_USAGE_DEFAULT;
 	ibd.BindFlags = D3D11_BIND_INDEX_BUFFER;
 	ibd.CPUAccessFlags = 0u;
@@ -309,7 +309,7 @@ void Graphics::Draw(float angle, float x, float z)
 	ibd.StructureByteStride = sizeof(unsigned short);
 
 	D3D11_SUBRESOURCE_DATA isd = {};
-	isd.pSysMem = &indices;
+	isd.pSysMem = indices.data();
 
 	GFX_THROW_INFO(pDevice->CreateBuffer(&ibd, &isd, &pIndexBuffer));
 
