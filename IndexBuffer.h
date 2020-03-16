@@ -1,4 +1,5 @@
 #pragma once
+
 #include "Bindable.h"
 
 class IndexBuffer : public Bindable
@@ -8,7 +9,7 @@ public:
 	void Bind(Graphics& gfx) noexcept override;
 	UINT GetCount() const noexcept;
 
-private:
+protected:
 	UINT count;
 	wrl::ComPtr<ID3D11Buffer> pIndexBuffer;
 };

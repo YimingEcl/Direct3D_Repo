@@ -1,4 +1,5 @@
 #pragma once
+
 #include "Bindable.h"
 
 class VertexBuffer : public Bindable
@@ -27,7 +28,7 @@ public:
 
 	void Bind(Graphics& gfx) noexcept override;
 
-private:
+protected:
 	UINT stride;
 	wrl::ComPtr<ID3D11Buffer> pVertexBuffer;
 };
