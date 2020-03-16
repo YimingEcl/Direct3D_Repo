@@ -8,6 +8,7 @@
 //  [X] Platform: Gamepad support. Enabled with 'io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad'.
 
 #pragma once
+
 #include "../OldWin.h"
 #include "imgui.h"
 

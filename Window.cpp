@@ -126,12 +126,16 @@ Window::Window(int width, int height, const WCHAR* name)
 	// show window
 	ShowWindow(hWnd, SW_SHOWDEFAULT);
 
+	// init imgui win32
+	ImGui_ImplWin32_Init(hWnd);
+
 	//create graphics object
 	pGfx = std::make_unique<Graphics>(hWnd);
 }
 
 Window::~Window()
 {
+	ImGui_ImplWin32_Shutdown();
 	DestroyWindow(hWnd);
 }
 
@@ -200,6 +204,12 @@ LRESULT WINAPI Window::HandleMsgThunk(HWND hWnd, UINT msg, WPARAM wParam, LPARAM
 
 LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept
 {
+	// imgui handler
+	if (ImGui_ImplWin32_WndProcHandler(hWnd, msg, wParam, lParam))
+	{
+		return true;
+	}
+
 	switch (msg)
 	{
 	case WM_CLOSE:

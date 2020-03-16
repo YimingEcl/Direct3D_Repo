@@ -9,7 +9,6 @@
 
 #include "imgui.h"
 #include "imgui_impl_win32.h"
-
 #include <tchar.h>
 
 // Using XInput library for gamepad (with recent Windows SDK this may leads to executables which won't run on Windows 7)

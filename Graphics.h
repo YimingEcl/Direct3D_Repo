@@ -11,6 +11,7 @@
 #include <DirectXMath.h>
 #include <memory>
 #include <random>
+#include "imgui/imgui_impl_dx11.h"
 
 namespace wrl = Microsoft::WRL;
 
