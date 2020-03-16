@@ -1,10 +1,10 @@
 #include "VertexShader.h"
 
-VertexShader::VertexShader(Graphics& gfx, WCHAR* path)
+VertexShader::VertexShader(Graphics& gfx, const std::wstring& path)
 {
 	INFOMAN(gfx);
 
-	GFX_THROW_INFO(D3DReadFileToBlob(path, &pBlob));
+	GFX_THROW_INFO(D3DReadFileToBlob(path.c_str(), &pBlob));
 	GFX_THROW_INFO(GetDevice(gfx)->CreateVertexShader(pBlob->GetBufferPointer(), pBlob->GetBufferSize(), nullptr, &pVertexShader));
 }
 

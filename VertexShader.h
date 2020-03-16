@@ -5,7 +5,7 @@
 class VertexShader : public Bindable
 {
 public:
-	VertexShader(Graphics& gfx, WCHAR* path);
+	VertexShader(Graphics& gfx, const std::wstring& path);
 	void Bind(Graphics& gfx) noexcept override;
 	ID3DBlob* GetBlob() const noexcept;
 

@@ -33,7 +33,7 @@ public:
 		cbd.Usage = D3D11_USAGE_DYNAMIC;
 		cbd.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 		cbd.MiscFlags = 0u;
-		cbd.ByteWidth = sizeof(C);
+		cbd.ByteWidth = sizeof(T);
 		cbd.StructureByteStride = 0u;
 		GFX_THROW_INFO(GetDevice(gfx)->CreateBuffer(&cbd, nullptr, &pConstantBuffer));
 	}
@@ -48,7 +48,7 @@ public:
 			D3D11_MAP_WRITE_DISCARD, 0u,
 			&msr
 		));
-		memcpy(msr.pData, &consts, sizeof(constants));
+		memcpy(msr.pData, &constants, sizeof(constants));
 		GetContext(gfx)->Unmap(pConstantBuffer.Get(), 0u);
 	}
 

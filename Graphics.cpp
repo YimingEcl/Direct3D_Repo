@@ -207,6 +207,16 @@ Graphics::Graphics(HWND hWnd)
 
 	// bind depth stencil view to pipeline
 	pContext->OMSetRenderTargets(1u, pTarget.GetAddressOf(), pDSV.Get());
+
+	// set viewport
+	D3D11_VIEWPORT vp;
+	vp.Width = 800.0f;
+	vp.Height = 600.0f;
+	vp.MinDepth = 0.0f;
+	vp.MaxDepth = 1.0f;
+	vp.TopLeftX = 0.0f;
+	vp.TopLeftY = 0.0f;
+	pContext->RSSetViewports(1u, &vp);
 }
 
 void Graphics::EndFrame()
@@ -236,204 +246,17 @@ void Graphics::ClearBuffer(float red, float green, float blue) noexcept
 	pContext->ClearDepthStencilView(pDSV.Get(), D3D11_CLEAR_DEPTH, 1.0f, 0u);
 }
 
-void Graphics::Draw(float angle, float x, float z)
+void Graphics::DrawIndexed(UINT count) noexcept(!IS_DEBUG)
 {
-	struct Vertex
-	{
-		float x;
-		float y;
-		float z;
-	};
-
-	struct Color
-	{
-		float r;
-		float g;
-		float b;
-		float a;
-	};
-
-	const std::vector<Vertex> vertices =
-	{
-		{-1.0f,-1.0f,-1.0f},
-		{ 1.0f,-1.0f,-1.0f},
-		{-1.0f, 1.0f,-1.0f},
-		{ 1.0f, 1.0f,-1.0f},
-		{-1.0f,-1.0f, 1.0f},
-		{ 1.0f,-1.0f, 1.0f},
-		{-1.0f, 1.0f, 1.0f},
-		{ 1.0f, 1.0f, 1.0f},
-	};
-
-	HRESULT hr;
-
-	// create vertex buffer
-	wrl::ComPtr<ID3D11Buffer> pVertexBuffer;
-
-	D3D11_BUFFER_DESC bd = {};
-	bd.ByteWidth = UINT(sizeof(Vertex) * vertices.size());
-	bd.Usage = D3D11_USAGE_DEFAULT;
-	bd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-	bd.CPUAccessFlags = 0u;
-	bd.MiscFlags = 0u;
-	bd.StructureByteStride = sizeof(Vertex);
-
-	D3D11_SUBRESOURCE_DATA sd = {};
-	sd.pSysMem = vertices.data();
-
-	GFX_THROW_INFO(pDevice->CreateBuffer(&bd, &sd, &pVertexBuffer));
-
-	// bind vertex buffer to pipeline
-	const UINT stride = sizeof(Vertex);
-	const UINT offset = 0u;
-	pContext->IASetVertexBuffers(0u, 1u, pVertexBuffer.GetAddressOf(), &stride, &offset);
-
-	// create index buffer
-	const std::vector<unsigned short> indices =
-	{
-		0,2,1, 2,3,1,
-		1,3,5, 3,7,5,
-		2,6,3, 3,6,7,
-		4,5,7, 4,7,6,
-		0,4,2, 2,4,6,
-		0,1,4, 1,5,4
-	};
-	wrl::ComPtr<ID3D11Buffer> pIndexBuffer;
-
-	D3D11_BUFFER_DESC ibd = {};
-	ibd.ByteWidth = UINT(sizeof(unsigned short) * indices.size());
-	ibd.Usage = D3D11_USAGE_DEFAULT;
-	ibd.BindFlags = D3D11_BIND_INDEX_BUFFER;
-	ibd.CPUAccessFlags = 0u;
-	ibd.MiscFlags = 0u;
-	ibd.StructureByteStride = sizeof(unsigned short);
-
-	D3D11_SUBRESOURCE_DATA isd = {};
-	isd.pSysMem = indices.data();
-
-	GFX_THROW_INFO(pDevice->CreateBuffer(&ibd, &isd, &pIndexBuffer));
-
-	// bind index buffer to pipeline
-	pContext->IASetIndexBuffer(pIndexBuffer.Get(), DXGI_FORMAT_R16_UINT, 0u);
-
-	// create constant buffer for vertex shader
-	struct ConstantBufferV
-	{
-		dx::XMMATRIX transform;
-	};
-
-	const ConstantBufferV cbv =
-	{
-		{
-			dx::XMMatrixTranspose(
-				dx::XMMatrixRotationZ(angle) *
-				dx::XMMatrixRotationX(angle) *
-				dx::XMMatrixScaling(3.0f / 4.0f, 1.0f, 1.0f) *
-				dx::XMMatrixTranslation(x, 0.0f, z * 4.0f + 5.0f) *
-				dx::XMMatrixPerspectiveFovLH(1.0f, 1.0f, 0.5f, 10.0f)
-			)
-		}
-	};
-
-	wrl::ComPtr<ID3D11Buffer> pConstantBufferV;
-
-	D3D11_BUFFER_DESC cbdv = {};
-	cbdv.ByteWidth = sizeof(cbv);
-	cbdv.Usage = D3D11_USAGE_DYNAMIC;
-	cbdv.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
-	cbdv.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
-	cbdv.MiscFlags = 0u;
-	cbdv.StructureByteStride = 0u;
-
-	D3D11_SUBRESOURCE_DATA csdv = {};
-	csdv.pSysMem = &cbv;
-
-	GFX_THROW_INFO(pDevice->CreateBuffer(&cbdv, &csdv, &pConstantBufferV));
-
-	// bind vertex shader constant buffer to pipeline
-	pContext->VSSetConstantBuffers(0u, 1u, pConstantBufferV.GetAddressOf());
-
-	// create constant buffer for pixel shader
-	struct ConstantBufferC
-	{
-		Color color[6] = {};
-	};
-
-	const ConstantBufferC cbc =
-	{
-		{
-			{1.0f, 0.0f, 1.0f},
-			{1.0f, 0.0f, 0.0f},
-			{0.0f, 1.0f, 0.0f},
-			{0.0f, 0.0f, 1.0f},
-			{1.0f, 1.0f, 0.0f},
-			{0.0f, 1.0f, 1.0f},
-		}
-	};
-	wrl::ComPtr<ID3D11Buffer> pConstantBufferC;
-
-	D3D11_BUFFER_DESC cbdc = {};
-	cbdc.ByteWidth = sizeof(cbc);
-	cbdc.Usage = D3D11_USAGE_DEFAULT;
-	cbdc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
-	cbdc.CPUAccessFlags = 0u;
-	cbdc.MiscFlags = 0u;
-	cbdc.StructureByteStride = 0u;
-
-	D3D11_SUBRESOURCE_DATA csdc = {};
-	csdc.pSysMem = &cbc;
-
-	GFX_THROW_INFO(pDevice->CreateBuffer(&cbdc, &csdc, &pConstantBufferC));
-
-	// bind pixel shader constant buffer to pipeline
-	pContext->PSSetConstantBuffers(0u, 1u, pConstantBufferC.GetAddressOf());
-
-	// create pixel shader
-	wrl::ComPtr<ID3D11PixelShader> pPixelShader;
-	wrl::ComPtr<ID3DBlob> pBlob;
-	GFX_THROW_INFO(D3DReadFileToBlob(L"PixelShader.cso", &pBlob));
-	GFX_THROW_INFO(pDevice->CreatePixelShader(pBlob->GetBufferPointer(), pBlob->GetBufferSize(), nullptr, &pPixelShader));
-
-	// bind pixel shader to pipeline
-	pContext->PSSetShader(pPixelShader.Get(), nullptr, 0u);
-
-	// create vertex shader
-	wrl::ComPtr<ID3D11VertexShader> pVertexShader;
-	GFX_THROW_INFO(D3DReadFileToBlob(L"VertexShader.cso", &pBlob));
-	GFX_THROW_INFO(pDevice->CreateVertexShader(pBlob->GetBufferPointer(), pBlob->GetBufferSize(), nullptr, &pVertexShader));
-
-	// bind vertex shader to pipeline
-	pContext->VSSetShader(pVertexShader.Get(), nullptr, 0u);
-
-	// input (vertex) layout
-	wrl::ComPtr<ID3D11InputLayout> pInputLayout;
-	const D3D11_INPUT_ELEMENT_DESC ied[] = {
-		{"Position", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0},
-		{"Color", 0, DXGI_FORMAT_R8G8B8A8_UNORM, 0, 12u, D3D11_INPUT_PER_VERTEX_DATA, 0}
-	};
-	GFX_THROW_INFO(pDevice->CreateInputLayout(
-		ied, (UINT)std::size(ied),
-		pBlob->GetBufferPointer(),
-		pBlob->GetBufferSize(),
-		&pInputLayout
-	));
-
-	// bind input layout
-	pContext->IASetInputLayout(pInputLayout.Get());
-
-	// set primitive topology
-	pContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
-	// configure viewport
-	D3D11_VIEWPORT vp;
-	vp.Width = 800;
-	vp.Height = 600;
-	vp.MinDepth = 0;
-	vp.MaxDepth = 1;
-	vp.TopLeftX = 0;
-	vp.TopLeftY = 0;
-	pContext->RSSetViewports(1u, &vp);
-
-	GFX_THROW_INFO_ONLY(pContext->DrawIndexed((UINT)std::size(indices), 0u, 0u));
+	GFX_THROW_INFO_ONLY(pContext->DrawIndexed(count, 0u, 0u));
 }
 
+void Graphics::SetProjection(DirectX::FXMMATRIX proj) noexcept
+{
+	projection = proj;
+}
+
+DirectX::XMMATRIX Graphics::GetProjection() const noexcept
+{
+	return projection;
+}

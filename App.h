@@ -2,6 +2,7 @@
 
 #include "Window.h"
 #include "Timer.h"
+#include "DancingCube.h"
 
 class App
 {
@@ -17,4 +18,5 @@ private:
 private:
 	Window wnd;
 	Timer timer;
+	std::vector<std::unique_ptr<class DancingCube>> dCubes;
 };

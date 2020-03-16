@@ -28,6 +28,12 @@
     <Filter Include="Source Files\BindableObjectClass">
       <UniqueIdentifier>{b7b51e00-57d2-4723-b101-7560d857bdd5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\DrawableObjectClass">
+      <UniqueIdentifier>{d540f4ec-b23a-44e4-a6f7-1c1ff9511ba5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DrawableObjectClass">
+      <UniqueIdentifier>{df788773-1356-4f62-883a-797fc2a32001}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp">
@@ -80,6 +86,15 @@
     </ClCompile>
     <ClCompile Include="PixelShader.cpp">
       <Filter>Source Files\BindableObjectClass</Filter>
+    </ClCompile>
+    <ClCompile Include="TransConstantBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DancingCube.cpp">
+      <Filter>Source Files\DrawableObjectClass</Filter>
+    </ClCompile>
+    <ClCompile Include="Drawable.cpp">
+      <Filter>Source Files\DrawableObjectClass</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -139,6 +154,18 @@
     </ClInclude>
     <ClInclude Include="OldWin.h">
       <Filter>Exception</Filter>
+    </ClInclude>
+    <ClInclude Include="Drawable.h">
+      <Filter>Header Files\DrawableObjectClass</Filter>
+    </ClInclude>
+    <ClInclude Include="BindableHeader.h">
+      <Filter>Header Files\BindableObjectClass</Filter>
+    </ClInclude>
+    <ClInclude Include="DancingCube.h">
+      <Filter>Header Files\DrawableObjectClass</Filter>
+    </ClInclude>
+    <ClInclude Include="TransConstantBuffer.h">
+      <Filter>Header Files\BindableObjectClass</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
