@@ -37,27 +37,27 @@ int App::Go()
 
 void App::DoFrame()
 {
-	auto dt = timer.Mark();
-	wnd.Gfx().ClearBuffer(0.07f, 0.0f, 0.12f);
+	const auto dt = timer.Mark() * speed_factor;
+
+	wnd.Gfx().BeignFrame(0.07f, 0.0f, 0.12f);
+	wnd.Gfx().SetCamera(camera.GetMatrix());
+
 	for (auto& b : dCubes)
 	{
-		b->Update(dt);
+		b->Update(wnd.kbd.KeyIsPressed(VK_SPACE) ? 0.0f : dt);
 		b->Draw(wnd.Gfx());
 	}
 
-	// imgui stuff
-	ImGui_ImplDX11_NewFrame();
-	ImGui_ImplWin32_NewFrame();
-	ImGui::NewFrame();
-
-	static bool show_demo_window = true;
-	if (show_demo_window)
+	if (ImGui::Begin("Speed Control"))
 	{
-		ImGui::ShowDemoWindow(&show_demo_window);
+		ImGui::SliderFloat("Speed Factor", &speed_factor, 0.0f, 4.0f);
+		ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+		ImGui::Text("State: %s", wnd.kbd.KeyIsPressed(VK_SPACE) ? "PAUSE" : "RUNNING");
 	}
-	ImGui::Render();
-	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
+	ImGui::End();
 
-	// present
+	camera.SpawnImguiWindow();
+
+	// present 
 	wnd.Gfx().EndFrame();
 }

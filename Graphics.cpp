@@ -222,9 +222,29 @@ Graphics::Graphics(HWND hWnd)
 	ImGui_ImplDX11_Init(pDevice.Get(), pContext.Get());
 }
 
+void Graphics::BeignFrame(float red, float green, float blue) noexcept
+{
+	if (isImguiEnable)
+	{
+		ImGui_ImplDX11_NewFrame();
+		ImGui_ImplWin32_NewFrame();
+		ImGui::NewFrame();
+	}
+
+	const float color[] = { red, green ,blue, 1.0f };
+	pContext->ClearRenderTargetView(pTarget.Get(), color);
+	pContext->ClearDepthStencilView(pDSV.Get(), D3D11_CLEAR_DEPTH, 1.0f, 0u);
+}
+
 void Graphics::EndFrame()
 {
 	HRESULT hr;
+
+	if (isImguiEnable)
+	{
+		ImGui::Render();
+		ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
+	}
 
 #ifndef NDEBUG
 	infoManager.Set();
@@ -254,6 +274,21 @@ void Graphics::DrawIndexed(UINT count) noexcept(!IS_DEBUG)
 	GFX_THROW_INFO_ONLY(pContext->DrawIndexed(count, 0u, 0u));
 }
 
+void Graphics::EnableImgui() noexcept
+{
+	isImguiEnable = true;
+}
+
+void Graphics::DisableImgui() noexcept
+{
+	isImguiEnable = false;
+}
+
+bool Graphics::IsImguiEnable() const noexcept
+{
+	return isImguiEnable;
+}
+
 void Graphics::SetProjection(DirectX::FXMMATRIX proj) noexcept
 {
 	projection = proj;
@@ -262,4 +297,14 @@ void Graphics::SetProjection(DirectX::FXMMATRIX proj) noexcept
 DirectX::XMMATRIX Graphics::GetProjection() const noexcept
 {
 	return projection;
+}
+
+void Graphics::SetCamera(DirectX::FXMMATRIX cam) noexcept
+{
+	camera = cam;
+}
+
+DirectX::XMMATRIX Graphics::GetCamera() const noexcept
+{
+	return camera;
 }

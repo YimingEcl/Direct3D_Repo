@@ -11,6 +11,7 @@
 #include <DirectXMath.h>
 #include <memory>
 #include <random>
+#include "imgui/imgui_impl_win32.h"
 #include "imgui/imgui_impl_dx11.h"
 
 namespace wrl = Microsoft::WRL;
@@ -64,18 +65,27 @@ public:
 	Graphics& operator=(const Graphics&) = delete;
 	~Graphics() = default;
 
+	void BeignFrame(float red, float green, float blue) noexcept;
 	void EndFrame();
 	void ClearBuffer(float red, float green, float blue) noexcept;
 	void DrawIndexed(UINT count) noexcept(!IS_DEBUG);
 
+	void EnableImgui() noexcept;
+	void DisableImgui() noexcept;
+	bool IsImguiEnable() const noexcept;
 	void SetProjection(DirectX::FXMMATRIX proj) noexcept;
 	DirectX::XMMATRIX GetProjection() const noexcept;
  
+	void SetCamera(DirectX::FXMMATRIX cam) noexcept;
+	DirectX::XMMATRIX GetCamera() const noexcept;
 private:
 #ifndef NDEBUG
-	DirectX::XMMATRIX projection;
 	DxgiInfoManager infoManager;
 #endif
+
+	bool isImguiEnable = true;
+	DirectX::XMMATRIX projection;
+	DirectX::XMMATRIX camera;
 
 	wrl::ComPtr<ID3D11Device> pDevice = nullptr;
 	wrl::ComPtr<IDXGISwapChain> pSwap = nullptr;
