@@ -8,12 +8,12 @@ DancingCube::DancingCube(Graphics& gfx, std::mt19937& rng,
 	std::uniform_real_distribution<float>& rdist)
 	:
 	r(rdist(rng)),
-	droll(ddist(rng)),
-	dpitch(ddist(rng)),
-	dyaw(ddist(rng)),
-	dphi(odist(rng)),
-	dtheta(odist(rng)),
-	dchi(odist(rng)),
+	droll(ddist(rng)),   //local x rotation
+	dpitch(ddist(rng)),  //local y rotation
+	dyaw(ddist(rng)),    //local z rotation
+	dphi(odist(rng)),    //world x rotation
+	dtheta(odist(rng)),  //world y rotation
+	dchi(odist(rng)),    //world z rotation
 	chi(adist(rng)),
 	theta(adist(rng)),
 	phi(adist(rng))

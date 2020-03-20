@@ -4,19 +4,22 @@ App::App()
 	:
 	wnd(800, 600, L"Main Window")
 {
-	std::mt19937 rng(std::random_device{}());
-	std::uniform_real_distribution<float> adist(0.0f, 3.1415f * 2.0f);
-	std::uniform_real_distribution<float> ddist(0.0f, 3.1415f * 2.0f);
-	std::uniform_real_distribution<float> odist(0.0f, 3.1415f * 0.3f);
-	std::uniform_real_distribution<float> rdist(6.0f, 20.0f);
-	for (auto i = 0; i < 80; i++)
-	{
-		dCubes.push_back(std::make_unique<DancingCube>(
-			wnd.Gfx(), rng, adist,
-			ddist, odist, rdist
-			));
-	}
-	wnd.Gfx().SetProjection(DirectX::XMMatrixPerspectiveLH(1.0f, 3.0f / 4.0f, 0.5f, 40.0f));
+	//std::mt19937 rng(std::random_device{}());
+	//std::uniform_real_distribution<float> adist(0.0f, 3.1415f * 2.0f);
+	//std::uniform_real_distribution<float> ddist(0.0f, 3.1415f * 2.0f);
+	//std::uniform_real_distribution<float> odist(0.0f, 3.1415f * 0.3f);
+	//std::uniform_real_distribution<float> rdist(6.0f, 20.0f);
+	//for (auto i = 0; i < 80; i++)
+	//{
+	//	dCubes.push_back(std::make_unique<DancingCube>(
+	//		wnd.Gfx(), rng, adist,
+	//		ddist, odist, rdist
+	//		));
+	//}
+
+	cube = std::make_unique<Cube>(wnd.Gfx());
+
+	wnd.Gfx().SetProjection(DirectX::XMMatrixPerspectiveLH(1.0f, 3.0f / 4.0f, 1.0f, 100.0f));
 }
 
 App::~App()
@@ -42,11 +45,13 @@ void App::DoFrame()
 	wnd.Gfx().BeignFrame(0.07f, 0.0f, 0.12f);
 	wnd.Gfx().SetCamera(camera.GetMatrix());
 
-	for (auto& b : dCubes)
-	{
-		b->Update(wnd.kbd.KeyIsPressed(VK_SPACE) ? 0.0f : dt);
-		b->Draw(wnd.Gfx());
-	}
+	//for (auto& b : dCubes)
+	//{
+	//	b->Update(wnd.kbd.KeyIsPressed(VK_SPACE) ? 0.0f : dt);
+	//	b->Draw(wnd.Gfx());
+	//}
+
+	cube->Draw(wnd.Gfx());
 
 	if (ImGui::Begin("Speed Control"))
 	{
@@ -55,6 +60,8 @@ void App::DoFrame()
 		ImGui::Text("State: %s", wnd.kbd.KeyIsPressed(VK_SPACE) ? "PAUSE" : "RUNNING");
 	}
 	ImGui::End();
+
+	cube->SpawnImguiWindow();
 
 	camera.SpawnImguiWindow();
 

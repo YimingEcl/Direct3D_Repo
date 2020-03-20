@@ -3,7 +3,7 @@
 #include "Window.h"
 #include "Timer.h"
 #include "Camera.h"
-#include "DancingCube.h"
+#include "Cube.h"
 #include "ImguiManager.h"
 #include "imgui/imgui.h"
 #include "imgui/imgui_impl_win32.h"
@@ -26,6 +26,7 @@ private:
 	Window wnd;
 	Timer timer;
 	Camera camera;
-	std::vector<std::unique_ptr<class DancingCube>> dCubes;
+	std::unique_ptr<class Cube> cube;
+	std::vector<std::unique_ptr<class Cube>> dCubes;
 	float speed_factor = 1.0f;
 };

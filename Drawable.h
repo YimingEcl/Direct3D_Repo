@@ -2,6 +2,8 @@
 
 #include "Graphics.h"
 
+using namespace DirectX;
+
 class Bindable;
 
 class Drawable

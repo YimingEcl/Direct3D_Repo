@@ -185,8 +185,8 @@ Graphics::Graphics(HWND hWnd)
 	wrl::ComPtr<ID3D11Texture2D> pDepthStencil;
 
 	D3D11_TEXTURE2D_DESC dtd = {};
-	dtd.Width = 800.0f;
-	dtd.Height = 600.0f;
+	dtd.Width = 800u;
+	dtd.Height = 600u;
 	dtd.MipLevels = 1u;
 	dtd.ArraySize = 1u;
 	dtd.Format = DXGI_FORMAT_D32_FLOAT;
