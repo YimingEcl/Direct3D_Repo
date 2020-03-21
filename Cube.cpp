@@ -54,12 +54,12 @@ Cube::Cube(Graphics& gfx)
 	const ConstantBuffer2 cb2 =
 	{
 		{
-			{1.0f, 0.0f, 1.0f},
-			{1.0f, 0.0f, 0.0f},
-			{0.0f, 1.0f, 0.0f},
-			{0.0f, 0.0f, 1.0f},
-			{1.0f, 1.0f, 0.0f},
-			{0.0f, 1.0f, 1.0f},
+			{ 1.0f,0.0f,0.0f },
+			{ 0.0f,1.0f,0.0f },
+			{ 1.0f,1.0f,0.0f },
+			{ 0.0f,0.0f,1.0f },
+			{ 1.0f,0.0f,1.0f },
+			{ 0.0f,1.0f,1.0f },
 		}
 	};
 	AddBind(std::make_unique<PixelConstantBuffer<ConstantBuffer2>>(gfx, cb2));

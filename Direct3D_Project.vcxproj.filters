@@ -90,9 +90,6 @@
     <ClCompile Include="PixelShader.cpp">
       <Filter>Source Files\BindableObjectClass</Filter>
     </ClCompile>
-    <ClCompile Include="TransConstantBuffer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="DancingCube.cpp">
       <Filter>Source Files\DrawableObjectClass</Filter>
     </ClCompile>
@@ -128,6 +125,9 @@
     </ClCompile>
     <ClCompile Include="Sphere.cpp">
       <Filter>Source Files\DrawableObjectClass</Filter>
+    </ClCompile>
+    <ClCompile Include="TransConstantBuffer.cpp">
+      <Filter>Source Files\BindableObjectClass</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -238,6 +238,9 @@
     </ClInclude>
     <ClInclude Include="Math.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawableHeader.h">
+      <Filter>Header Files\DrawableObjectClass</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
