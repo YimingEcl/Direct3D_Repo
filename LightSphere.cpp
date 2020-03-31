@@ -12,35 +12,19 @@ LightSphere::LightSphere(Graphics& gfx)
 	// bind to pipeline
 	AddBind(std::make_unique<VertexBuffer>(gfx, model.vertices));
 
-	auto pvs = std::make_unique<VertexShader>(gfx, L"VertexShader.cso");
+	auto pvs = std::make_unique<VertexShader>(gfx, L"LightVS.cso");
 	auto pvsbc = pvs->GetBlob();
 	AddBind(std::move(pvs));
 
-	AddBind(std::make_unique<PixelShader>(gfx, L"PixelShader.cso"));
+	AddBind(std::make_unique<PixelShader>(gfx, L"LightPS.cso"));
 	AddIndexBuffer(std::make_unique<IndexBuffer>(gfx, model.indices));
 
-	struct ConstantBuffer2
+	struct PSConstantBuffer
 	{
-		struct
-		{
-			float r;
-			float g;
-			float b;
-			float a;
-		} face_colors[6];
-	};
-	const ConstantBuffer2 cb2 =
-	{
-		{
-			{ 1.0f,0.0f,0.0f },
-			{ 0.0f,1.0f,0.0f },
-			{ 1.0f,1.0f,0.0f },
-			{ 0.0f,0.0f,1.0f },
-			{ 1.0f,0.0f,1.0f },
-			{ 0.0f,1.0f,1.0f },
-		}
-	};
-	AddBind(std::make_unique<PixelConstantBuffer<ConstantBuffer2>>(gfx, cb2));
+		XMFLOAT3 color = { 1.0f, 1.0f, 1.0f };
+		float padding = 1.0f;
+	} colorConst;
+	AddBind(std::make_unique<PixelConstantBuffer<PSConstantBuffer>>(gfx, colorConst));
 
 	const std::vector<D3D11_INPUT_ELEMENT_DESC> ied =
 	{

@@ -4,6 +4,7 @@
 #include "Timer.h"
 #include "Camera.h"
 #include "DrawableHeader.h"
+#include "PointLight.h"
 #include "ImguiManager.h"
 #include "imgui/imgui.h"
 #include "imgui/imgui_impl_win32.h"
@@ -26,6 +27,7 @@ private:
 	Window wnd;
 	Timer timer;
 	Camera camera;
+	PointLight light;
 	std::unique_ptr<SolidSphere> sphere;
 	std::unique_ptr<Box> cube;
 	/*std::vector<std::unique_ptr<class Cube>> dCubes;*/

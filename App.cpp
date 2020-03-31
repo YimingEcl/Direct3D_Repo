@@ -2,7 +2,8 @@
 
 App::App()
 	:
-	wnd(800, 600, L"Main Window")
+	wnd(800, 600, L"Main Window"),
+	light(wnd.Gfx())
 {
 	//std::mt19937 rng(std::random_device{}());
 	//std::uniform_real_distribution<float> adist(0.0f, 3.1415f * 2.0f);
@@ -45,6 +46,7 @@ void App::DoFrame()
 
 	wnd.Gfx().BeignFrame(0.07f, 0.0f, 0.12f);
 	wnd.Gfx().SetCamera(camera.GetMatrix());
+	light.Bind(wnd.Gfx());
 
 	//for (auto& b : dCubes)
 	//{
@@ -52,6 +54,7 @@ void App::DoFrame()
 	//	b->Draw(wnd.Gfx());
 	//}
 
+	light.Draw(wnd.Gfx());
 	cube->Draw(wnd.Gfx());
 	sphere->Draw(wnd.Gfx());
 
@@ -66,6 +69,7 @@ void App::DoFrame()
 	cube->SpawnImguiWindow();
 	sphere->Update(dt);
 	sphere->SpawnImguiWindow();
+	light.SpawnImguiWindow();
 
 	camera.SpawnImguiWindow();
 

@@ -9,7 +9,15 @@ class TransConstantBuffer: public Bindable
 public:
 	TransConstantBuffer(Graphics& gfx, const Drawable& parent);
 	void Bind(Graphics& gfx) noexcept override;
+
 private:
-	VertexConstantBuffer<DirectX::XMMATRIX> vcbuf;
+	struct Transforms
+	{
+		DirectX::XMMATRIX modelViewProj;
+		DirectX::XMMATRIX model;
+	};
+
+private:
+	static std::unique_ptr<VertexConstantBuffer<Transforms>> pVcbuf;
 	const Drawable& parent;
 };

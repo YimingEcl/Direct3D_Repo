@@ -141,6 +141,9 @@
     <ClCompile Include="LightSphere.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PointLight.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -272,6 +275,9 @@
     <ClInclude Include="LightSphere.h">
       <Filter>Header Files\DrawableObjectClass\Custom Geometry</Filter>
     </ClInclude>
+    <ClInclude Include="PointLight.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXGetErrorDescription.inl">
@@ -289,6 +295,12 @@
       <Filter>Shader</Filter>
     </FxCompile>
     <FxCompile Include="SixColorVS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="LightPS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="LightVS.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
   </ItemGroup>
