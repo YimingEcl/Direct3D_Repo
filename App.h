@@ -26,8 +26,8 @@ private:
 	Window wnd;
 	Timer timer;
 	Camera camera;
-	std::unique_ptr<class Sphere> sphere;
-	std::unique_ptr<class Box> cube;
+	std::unique_ptr<SolidSphere> sphere;
+	std::unique_ptr<Box> cube;
 	/*std::vector<std::unique_ptr<class Cube>> dCubes;*/
 	float speed_factor = 1.0f;
 };

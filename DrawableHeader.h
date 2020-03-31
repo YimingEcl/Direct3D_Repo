@@ -2,4 +2,4 @@
 
 #include "DancingCube.h"
 #include "Box.h"
-#include "Sphere.h"
+#include "SolidSphere.h"

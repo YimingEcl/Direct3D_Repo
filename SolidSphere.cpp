@@ -1,14 +1,18 @@
-#include "Box.h"
+#include "SolidSphere.h"
 
-Box::Box(Graphics& gfx)
+SolidSphere::SolidSphere(Graphics& gfx, int latDiv, int longDiv)
+	:
+	latDiv(latDiv),
+	longDiv(longDiv)
 {
 	struct Vertex
 	{
 		XMFLOAT3 pos;
 	};
 
-	auto model = Cube::Make<Vertex>();
+	auto model = Sphere::Make<Vertex>();
 
+	// bind to pipeline
 	AddBind(std::make_unique<VertexBuffer>(gfx, model.vertices));
 
 	auto pvs = std::make_unique<VertexShader>(gfx, L"VertexShader.cso");
@@ -16,7 +20,6 @@ Box::Box(Graphics& gfx)
 	AddBind(std::move(pvs));
 
 	AddBind(std::make_unique<PixelShader>(gfx, L"PixelShader.cso"));
-
 	AddIndexBuffer(std::make_unique<IndexBuffer>(gfx, model.indices));
 
 	struct ConstantBuffer2
@@ -53,14 +56,12 @@ Box::Box(Graphics& gfx)
 	AddBind(std::make_unique<TransConstantBuffer>(gfx, *this));
 }
 
-void Box::SpawnImguiWindow() noexcept
+void SolidSphere::SpawnImguiWindow() noexcept
 {
-	if (ImGui::Begin("Cube"))
+	if (ImGui::Begin("Sphere"))
 	{
-		ImGui::Text("Size");
-		ImGui::SliderFloat("Length", &scaling.x, 0.0f, 10.0f, "%.1f");
-		ImGui::SliderFloat("Width", &scaling.y, 0.0f, 10.0f, "%.1f");
-		ImGui::SliderFloat("Height", &scaling.z, 0.0f, 10.0f, "%.1f");
+		ImGui::Text("Basic");
+		ImGui::SliderFloat("Radius", &radius, 0.5f, 20.0f, "%.1f");
 		ImGui::Text("Position");
 		ImGui::SliderFloat("Pos_X", &position.x, -20.0f, 20.0f, "%.1f");
 		ImGui::SliderFloat("Pos_Y", &position.y, -20.0f, 20.0f, "%.1f");
@@ -77,24 +78,20 @@ void Box::SpawnImguiWindow() noexcept
 	ImGui::End();
 }
 
-void Box::Reset() noexcept
+void SolidSphere::Reset() noexcept
 {
-	scaling.x = 1.0f;
-	scaling.y = 1.0f;
-	scaling.z = 1.0f;
-	position.x = 0.0f;
-	position.y = 0.0f;
-	position.z = 0.0f;
-	rotation.x = 0.0f;
-	rotation.y = 0.0f;
-	rotation.z = 0.0f;
+	radius = 1.0f;
+	scaling = XMFLOAT4(radius, radius, radius, 1.0f);
+	position = XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f);
+	rotation = XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f);
 }
 
-void Box::Update(float dt) noexcept
+void SolidSphere::Update(float dt) noexcept
 {
+	scaling = XMFLOAT4(radius, radius, radius, 1.0f);
 }
 
-DirectX::XMMATRIX Box::GetTransformXM() const noexcept
+XMMATRIX SolidSphere::GetTransformXM() const noexcept
 {
 	return XMMatrixScalingFromVector(XMLoadFloat4(&scaling)) *
 		XMMatrixRotationRollPitchYawFromVector(XMLoadFloat4(&rotation)) *

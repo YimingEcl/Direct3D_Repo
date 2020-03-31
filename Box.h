@@ -2,6 +2,7 @@
 
 #include "Drawable.h"
 #include "BindableHeader.h"
+#include "Cube.h"
 
 class Box : public Drawable
 {
