@@ -11,11 +11,11 @@ Ground::Ground(Graphics& gfx)
 
 	AddBind(std::make_unique<VertexBuffer>(gfx, model.vertices));
 
-	auto pvs = std::make_unique<VertexShader>(gfx, L"VertexShader.cso");
+	auto pvs = std::make_unique<VertexShader>(gfx, L"SixColorVS.cso");
 	auto pvsbc = pvs->GetBlob();
 	AddBind(std::move(pvs));
 
-	AddBind(std::make_unique<PixelShader>(gfx, L"PixelShader.cso"));
+	AddBind(std::make_unique<PixelShader>(gfx, L"SixColorPS.cso"));
 
 	AddIndexBuffer(std::make_unique<IndexBuffer>(gfx, model.indices));
 

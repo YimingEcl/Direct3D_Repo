@@ -40,11 +40,11 @@ DancingCube::DancingCube(Graphics& gfx, std::mt19937& rng,
 	};
 	AddBind(std::make_unique<VertexBuffer>(gfx, vertices));
 
-	auto pvs = std::make_unique<VertexShader>(gfx, L"VertexShader.cso");
+	auto pvs = std::make_unique<VertexShader>(gfx, L"SixColorVS.cso");
 	auto pvsbc = pvs->GetBlob();
 	AddBind(std::move(pvs));
 
-	AddBind(std::make_unique<PixelShader>(gfx, L"PixelShader.cso"));
+	AddBind(std::make_unique<PixelShader>(gfx, L"SixColorPS.cso"));
 
 	const std::vector<unsigned short> indices =
 	{

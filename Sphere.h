@@ -88,6 +88,6 @@ public:
 	template<class T>
 	static IndexedTriangleList<T> Make()
 	{
-		return MakeTesselated<T>(12, 24);
+		return MakeTesselated<T>(18, 18);
 	}
 };
