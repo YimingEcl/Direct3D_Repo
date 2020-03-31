@@ -10,7 +10,7 @@ SolidSphere::SolidSphere(Graphics& gfx, int latDiv, int longDiv)
 		XMFLOAT3 pos;
 	};
 
-	auto model = Sphere::Make<Vertex>();
+	auto model = Sphere::MakeTesselated<Vertex>(latDiv, longDiv);
 
 	// bind to pipeline
 	AddBind(std::make_unique<VertexBuffer>(gfx, model.vertices));

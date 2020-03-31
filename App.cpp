@@ -18,7 +18,7 @@ App::App()
 	//}
 
 	cube = std::make_unique<Box>(wnd.Gfx());
-	sphere = std::make_unique<SolidSphere>(wnd.Gfx(), 12, 24);
+	sphere = std::make_unique<SolidSphere>(wnd.Gfx(), 15, 15);
 
 	wnd.Gfx().SetProjection(DirectX::XMMatrixPerspectiveLH(1.0f, 3.0f / 4.0f, 1.0f, 100.0f));
 }

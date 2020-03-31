@@ -187,6 +187,7 @@
     <ClCompile Include="IndexBuffer.cpp" />
     <ClCompile Include="InputLayout.cpp" />
     <ClCompile Include="Keyboard.cpp" />
+    <ClCompile Include="LightSphere.cpp" />
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="PixelShader.cpp" />
     <ClCompile Include="SolidSphere.cpp" />
@@ -228,6 +229,7 @@
     <ClInclude Include="IndexedTriangleList.h" />
     <ClInclude Include="InputLayout.h" />
     <ClInclude Include="Keyboard.h" />
+    <ClInclude Include="LightSphere.h" />
     <ClInclude Include="Math.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="OldWin.h" />

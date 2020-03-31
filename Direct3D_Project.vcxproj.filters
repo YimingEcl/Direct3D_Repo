@@ -138,6 +138,9 @@
     <ClCompile Include="Ground.cpp">
       <Filter>Source Files\DrawableObjectClass</Filter>
     </ClCompile>
+    <ClCompile Include="LightSphere.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -264,6 +267,9 @@
       <Filter>Header Files\DrawableObjectClass\BasicModel</Filter>
     </ClInclude>
     <ClInclude Include="Ground.h">
+      <Filter>Header Files\DrawableObjectClass\Custom Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="LightSphere.h">
       <Filter>Header Files\DrawableObjectClass\Custom Geometry</Filter>
     </ClInclude>
   </ItemGroup>
