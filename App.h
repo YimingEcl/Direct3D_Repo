@@ -27,7 +27,7 @@ private:
 	Timer timer;
 	Camera camera;
 	std::unique_ptr<class Sphere> sphere;
-	std::unique_ptr<class Cube> cube;
+	std::unique_ptr<class Box> cube;
 	/*std::vector<std::unique_ptr<class Cube>> dCubes;*/
 	float speed_factor = 1.0f;
 };

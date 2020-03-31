@@ -102,7 +102,7 @@ const char* Graphics::InfoException::what() const noexcept
 
 const char* Graphics::InfoException::GetType() const noexcept
 {
-	return "Chili Graphics Info Exception";
+	return "Graphics Info Exception";
 }
 
 std::string Graphics::InfoException::GetErrorInfo() const noexcept

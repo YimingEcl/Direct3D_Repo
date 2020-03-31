@@ -1,5 +1,5 @@
 #pragma once
 
 #include "DancingCube.h"
-#include "Cube.h"
+#include "Box.h"
 #include "Sphere.h"

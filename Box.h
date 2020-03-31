@@ -3,10 +3,10 @@
 #include "Drawable.h"
 #include "BindableHeader.h"
 
-class Cube : public Drawable
+class Box : public Drawable
 {
 public:
-	Cube(Graphics& gfx);
+	Box(Graphics& gfx);
 
 	void SpawnImguiWindow() noexcept;
 	void Reset() noexcept;

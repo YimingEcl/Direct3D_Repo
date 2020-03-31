@@ -120,14 +120,14 @@
     <ClCompile Include="Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Cube.cpp">
-      <Filter>Source Files\DrawableObjectClass</Filter>
-    </ClCompile>
     <ClCompile Include="Sphere.cpp">
       <Filter>Source Files\DrawableObjectClass</Filter>
     </ClCompile>
     <ClCompile Include="TransConstantBuffer.cpp">
       <Filter>Source Files\BindableObjectClass</Filter>
+    </ClCompile>
+    <ClCompile Include="Box.cpp">
+      <Filter>Source Files\DrawableObjectClass</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -230,9 +230,6 @@
     <ClInclude Include="Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Cube.h">
-      <Filter>Header Files\DrawableObjectClass</Filter>
-    </ClInclude>
     <ClInclude Include="Sphere.h">
       <Filter>Header Files\DrawableObjectClass</Filter>
     </ClInclude>
@@ -240,6 +237,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DrawableHeader.h">
+      <Filter>Header Files\DrawableObjectClass</Filter>
+    </ClInclude>
+    <ClInclude Include="Box.h">
       <Filter>Header Files\DrawableObjectClass</Filter>
     </ClInclude>
   </ItemGroup>

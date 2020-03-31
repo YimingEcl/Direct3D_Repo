@@ -1,6 +1,6 @@
-#include "Cube.h"
+#include "Box.h"
 
-Cube::Cube(Graphics& gfx)
+Box::Box(Graphics& gfx)
 {
 	struct Vertex
 	{
@@ -75,7 +75,7 @@ Cube::Cube(Graphics& gfx)
 	AddBind(std::make_unique<TransConstantBuffer>(gfx, *this));
 }
 
-void Cube::SpawnImguiWindow() noexcept
+void Box::SpawnImguiWindow() noexcept
 {
 	if (ImGui::Begin("Cube"))
 	{
@@ -99,7 +99,7 @@ void Cube::SpawnImguiWindow() noexcept
 	ImGui::End();
 }
 
-void Cube::Reset() noexcept
+void Box::Reset() noexcept
 {
 	scaling.x = 1.0f;
 	scaling.y = 1.0f;
@@ -112,11 +112,11 @@ void Cube::Reset() noexcept
 	rotation.z = 0.0f;
 }
 
-void Cube::Update(float dt) noexcept
+void Box::Update(float dt) noexcept
 {
 }
 
-DirectX::XMMATRIX Cube::GetTransformXM() const noexcept
+DirectX::XMMATRIX Box::GetTransformXM() const noexcept
 {
 	return XMMatrixScalingFromVector(XMLoadFloat4(&scaling)) *
 		XMMatrixRotationRollPitchYawFromVector(XMLoadFloat4(&rotation)) *
