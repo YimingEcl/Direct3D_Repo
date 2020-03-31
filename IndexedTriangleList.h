@@ -1,7 +1,10 @@
 #pragma once
 
+#include <array>
 #include <vector>
-#include <DirectXMath.h>
+#include "Math.h"
+
+using namespace DirectX;
 
 template<class T>
 class IndexedTriangleList

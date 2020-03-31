@@ -176,6 +176,7 @@
     <ClCompile Include="DxgiInfoManager.cpp" />
     <ClCompile Include="Exception.cpp" />
     <ClCompile Include="Graphics.cpp" />
+    <ClCompile Include="Ground.cpp" />
     <ClCompile Include="ImguiManager.cpp" />
     <ClCompile Include="imgui\imgui.cpp" />
     <ClCompile Include="imgui\imgui_demo.cpp" />
@@ -213,6 +214,7 @@
     <ClInclude Include="Exception.h" />
     <ClInclude Include="ExceptMacro.h" />
     <ClInclude Include="Graphics.h" />
+    <ClInclude Include="Ground.h" />
     <ClInclude Include="ImguiManager.h" />
     <ClInclude Include="imgui\imconfig.h" />
     <ClInclude Include="imgui\imgui.h" />
@@ -230,6 +232,7 @@
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="OldWin.h" />
     <ClInclude Include="PixelShader.h" />
+    <ClInclude Include="Plane.h" />
     <ClInclude Include="SolidSphere.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="Timer.h" />

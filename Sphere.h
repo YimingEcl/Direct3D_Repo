@@ -1,7 +1,6 @@
 #pragma once
 
 #include "IndexedTriangleList.h"
-#include "Math.h"
 
 class Sphere
 {
@@ -9,7 +8,6 @@ public:
 	template<class T>
 	static IndexedTriangleList<T> MakeTesselated(int latDiv, int longDiv)
 	{
-		namespace dx = DirectX;
 		assert(latDiv >= 3);
 		assert(longDiv >= 3);
 

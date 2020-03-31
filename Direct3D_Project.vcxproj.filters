@@ -37,6 +37,12 @@
     <Filter Include="imgui">
       <UniqueIdentifier>{34b0a4d9-4dbc-4182-a44a-432f39eef659}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\DrawableObjectClass\BasicModel">
+      <UniqueIdentifier>{b8e2199e-8c9b-4cc2-a6b2-8dc99b6cf6ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\DrawableObjectClass\Custom Geometry">
+      <UniqueIdentifier>{ba68901b-bd0d-4fe4-97ed-1fe8f46d006e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp">
@@ -129,6 +135,9 @@
     <ClCompile Include="SolidSphere.cpp">
       <Filter>Source Files\DrawableObjectClass</Filter>
     </ClCompile>
+    <ClCompile Include="Ground.cpp">
+      <Filter>Source Files\DrawableObjectClass</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -194,9 +203,6 @@
     <ClInclude Include="BindableHeader.h">
       <Filter>Header Files\BindableObjectClass</Filter>
     </ClInclude>
-    <ClInclude Include="DancingCube.h">
-      <Filter>Header Files\DrawableObjectClass</Filter>
-    </ClInclude>
     <ClInclude Include="TransConstantBuffer.h">
       <Filter>Header Files\BindableObjectClass</Filter>
     </ClInclude>
@@ -236,20 +242,29 @@
     <ClInclude Include="DrawableHeader.h">
       <Filter>Header Files\DrawableObjectClass</Filter>
     </ClInclude>
-    <ClInclude Include="Box.h">
-      <Filter>Header Files\DrawableObjectClass</Filter>
-    </ClInclude>
-    <ClInclude Include="Cube.h">
-      <Filter>Header Files\DrawableObjectClass</Filter>
-    </ClInclude>
     <ClInclude Include="IndexedTriangleList.h">
-      <Filter>Header Files\DrawableObjectClass</Filter>
-    </ClInclude>
-    <ClInclude Include="SolidSphere.h">
-      <Filter>Header Files\DrawableObjectClass</Filter>
+      <Filter>Header Files\DrawableObjectClass\BasicModel</Filter>
     </ClInclude>
     <ClInclude Include="Sphere.h">
-      <Filter>Header Files\DrawableObjectClass</Filter>
+      <Filter>Header Files\DrawableObjectClass\BasicModel</Filter>
+    </ClInclude>
+    <ClInclude Include="Cube.h">
+      <Filter>Header Files\DrawableObjectClass\BasicModel</Filter>
+    </ClInclude>
+    <ClInclude Include="Box.h">
+      <Filter>Header Files\DrawableObjectClass\Custom Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="DancingCube.h">
+      <Filter>Header Files\DrawableObjectClass\Custom Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="SolidSphere.h">
+      <Filter>Header Files\DrawableObjectClass\Custom Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Plane.h">
+      <Filter>Header Files\DrawableObjectClass\BasicModel</Filter>
+    </ClInclude>
+    <ClInclude Include="Ground.h">
+      <Filter>Header Files\DrawableObjectClass\Custom Geometry</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

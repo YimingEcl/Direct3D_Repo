@@ -2,12 +2,12 @@
 
 #include "BindableHeader.h"
 #include "Drawable.h"
-#include "Cube.h"
+#include "Plane.h"
 
-class Box : public Drawable
+class Ground : public Drawable
 {
 public:
-	Box(Graphics& gfx);
+	Ground(Graphics& gfx);
 
 	void SpawnImguiWindow() noexcept;
 	void Reset() noexcept;
