@@ -52,8 +52,10 @@ DancingCube::DancingCube(Graphics& gfx, std::mt19937& rng,
 
 	struct PSObjectCBuf
 	{
-		XMFLOAT3 color;
-		float padding = 0.0f;
+		alignas(16) XMFLOAT3 color;
+		float specularIntensity = 0.6f;
+		float specularPower = 30.0f;
+		float padding[2] = {0.0f, 0.0f};
 	} colorConst;
 
 	colorConst.color = materialColor;

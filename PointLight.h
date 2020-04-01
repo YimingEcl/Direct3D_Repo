@@ -11,7 +11,7 @@ public:
 	void SpawnImguiWindow() noexcept;
 	void Reset() noexcept;
 	void Draw(Graphics& gfx) const noexcept(!IS_DEBUG);
-	void Bind(Graphics& gfx) const noexcept;
+	void Bind(Graphics& gfx, FXMMATRIX cameraView) const noexcept;
 
 private:
 	struct PointLightCBuf

@@ -2,7 +2,7 @@
 
 App::App()
 	:
-	wnd(800, 600, L"Main Window"),
+	wnd(1280, 720, L"Main Window"),
 	light(wnd.Gfx())
 {
 	std::mt19937 rng(std::random_device{}());
@@ -24,7 +24,7 @@ App::App()
 	//cube = std::make_unique<Box>(wnd.Gfx());
 	//sphere = std::make_unique<SolidSphere>(wnd.Gfx(), 15, 15);
 
-	wnd.Gfx().SetProjection(DirectX::XMMatrixPerspectiveLH(1.0f, 3.0f / 4.0f, 1.0f, 100.0f));
+	wnd.Gfx().SetProjection(DirectX::XMMatrixPerspectiveLH(1.0f, 9.0f / 16.0f, 1.0f, 100.0f));
 }
 
 App::~App()
@@ -49,7 +49,7 @@ void App::DoFrame()
 
 	wnd.Gfx().BeignFrame(0.07f, 0.0f, 0.12f);
 	wnd.Gfx().SetCamera(camera.GetMatrix());
-	light.Bind(wnd.Gfx());
+	light.Bind(wnd.Gfx(), camera.GetMatrix());
 
 	for (auto& b : dCubes)
 	{
@@ -74,7 +74,7 @@ void App::DoFrame()
 	//sphere->SpawnImguiWindow();
 	light.SpawnImguiWindow();
 
-	//camera.SpawnImguiWindow();
+	camera.SpawnImguiWindow();
 
 	// present 
 	wnd.Gfx().EndFrame();

@@ -52,8 +52,11 @@ void PointLight::Draw(Graphics& gfx) const noexcept(!IS_DEBUG)
 	mesh.Draw(gfx);
 }
 
-void PointLight::Bind(Graphics& gfx) const noexcept
+void PointLight::Bind(Graphics& gfx, FXMMATRIX cameraView) const noexcept
 {
-	cbuf.Update(gfx, cbData);
+	const auto pos = XMLoadFloat3(&cbData.pos);
+	auto updateData = cbData;
+	XMStoreFloat3(&updateData.pos, XMVector3Transform(pos, cameraView));
+	cbuf.Update(gfx, updateData);
 	cbuf.Bind(gfx);
 }
