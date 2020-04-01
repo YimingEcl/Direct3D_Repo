@@ -30,6 +30,6 @@ private:
 	PointLight light;
 	std::unique_ptr<SolidSphere> sphere;
 	std::unique_ptr<Box> cube;
-	/*std::vector<std::unique_ptr<class Cube>> dCubes;*/
+	std::vector<std::unique_ptr<DancingCube>> dCubes;
 	float speed_factor = 1.0f;
 };
