@@ -16,12 +16,17 @@ public:
 private:
 	struct PointLightCBuf
 	{
-		XMFLOAT3 pos;
-		float padding = 0.0f;
+		alignas(16) XMFLOAT3 pos;
+		alignas(16) XMFLOAT3 ambient;
+		alignas(16) XMFLOAT3 diffuseColor;
+		float diffuseIntensity;
+		float linear_attenuation;
+		float quadradic_attenuation;
+		float constant_attenuation;
 	};
 
 private:
-	XMFLOAT3 pos = { 0.0f, 0.0f, 0.0f };
+	PointLightCBuf cbData;
 	mutable LightSphere mesh;
 	mutable PixelConstantBuffer<PointLightCBuf> cbuf;
 };

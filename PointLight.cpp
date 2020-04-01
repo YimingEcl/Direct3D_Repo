@@ -5,6 +5,7 @@ PointLight::PointLight(Graphics& gfx)
 	mesh(gfx),
 	cbuf(gfx)
 {
+	Reset();
 }
 
 void PointLight::SpawnImguiWindow() noexcept
@@ -12,9 +13,17 @@ void PointLight::SpawnImguiWindow() noexcept
 	if (ImGui::Begin("Light"))
 	{
 		ImGui::Text("Position");
-		ImGui::SliderFloat("X", &pos.x, -60.0f, 60.0f, "%.1f");
-		ImGui::SliderFloat("Y", &pos.y, -60.0f, 60.0f, "%.1f");
-		ImGui::SliderFloat("Z", &pos.z, -60.0f, 60.0f, "%.1f");
+		ImGui::SliderFloat("X", &cbData.pos.x, -15.0f, 15.0f, "%.1f");
+		ImGui::SliderFloat("Y", &cbData.pos.y, -10.0f, 10.0f, "%.1f");
+		ImGui::SliderFloat("Z", &cbData.pos.z, -40.0f, 40.0f, "%.1f");
+		ImGui::Text("Intensity/Color");
+		ImGui::SliderFloat("Intensity", &cbData.diffuseIntensity, 0.01f, 2.0f, "%.2f", 2);
+		ImGui::ColorEdit3("Diffuse Color", &cbData.diffuseColor.x);
+		ImGui::ColorEdit3("Ambient", &cbData.ambient.x);
+		ImGui::Text("Attenuation");
+		ImGui::SliderFloat("Linear", &cbData.linear_attenuation, 0.0001f, 4.0f, "%.4f", 8);
+		ImGui::SliderFloat("Quadratic", &cbData.quadradic_attenuation, 0.0000001f, 10.0f, "%.7f", 10);
+		ImGui::SliderFloat("Constant", &cbData.constant_attenuation, 0.05f, 10.0f, "%.2f", 4);
 		if (ImGui::Button("Reset"))
 		{
 			Reset();
@@ -26,17 +35,25 @@ void PointLight::SpawnImguiWindow() noexcept
 
 void PointLight::Reset() noexcept
 {
-	pos = { 0.0f,0.0f,0.0f };
+	cbData = {
+	{ 0.0f,0.0f,0.0f },
+	{ 0.05f,0.05f,0.05f },
+	{ 1.0f,1.0f,1.0f },
+	1.0f,
+	0.045f,
+	0.0075f,
+	1.0f,
+	};
 }
 
 void PointLight::Draw(Graphics& gfx) const noexcept(!IS_DEBUG)
 {
-	mesh.SetPos(pos);
+	mesh.SetPos(cbData.pos);
 	mesh.Draw(gfx);
 }
 
 void PointLight::Bind(Graphics& gfx) const noexcept
 {
-	cbuf.Update(gfx, PointLightCBuf{ pos });
+	cbuf.Update(gfx, cbData);
 	cbuf.Bind(gfx);
 }

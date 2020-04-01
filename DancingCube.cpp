@@ -5,7 +5,8 @@ DancingCube::DancingCube(Graphics& gfx, std::mt19937& rng,
 	std::uniform_real_distribution<float>& ddist,
 	std::uniform_real_distribution<float>& odist,
 	std::uniform_real_distribution<float>& rdist,
-	std::uniform_real_distribution<float>& bdist)
+	std::uniform_real_distribution<float>& bdist,
+	std::uniform_real_distribution<float>& cdist)
 	:
 	r(rdist(rng)),
 	droll(ddist(rng)),   //local x rotation
@@ -16,7 +17,8 @@ DancingCube::DancingCube(Graphics& gfx, std::mt19937& rng,
 	dchi(odist(rng)),    //world z rotation
 	chi(adist(rng)),
 	theta(adist(rng)),
-	phi(adist(rng))
+	phi(adist(rng)),
+	materialColor({cdist(rng), cdist(rng), cdist(rng)})
 {
 	struct Vertex
 	{
@@ -47,6 +49,15 @@ DancingCube::DancingCube(Graphics& gfx, std::mt19937& rng,
 	AddBind(std::make_unique<Topology>(gfx, D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST));
 
 	AddBind(std::make_unique<TransConstantBuffer>(gfx, *this));
+
+	struct PSObjectCBuf
+	{
+		XMFLOAT3 color;
+		float padding = 0.0f;
+	} colorConst;
+
+	colorConst.color = materialColor;
+	AddBind(std::make_unique<PixelConstantBuffer<PSObjectCBuf>>(gfx, colorConst, 1u));
 
 	XMStoreFloat3x3(&mt, XMMatrixScaling(1.0f, 1.0f, bdist(rng))
 	);

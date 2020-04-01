@@ -10,13 +10,14 @@ App::App()
 	std::uniform_real_distribution<float> ddist(0.0f, 3.1415f * 2.0f);
 	std::uniform_real_distribution<float> odist(0.0f, 3.1415f * 0.3f);
 	std::uniform_real_distribution<float> rdist(6.0f, 20.0f);
-	std::uniform_real_distribution<float> bdist{ 0.4f,3.0f };
+	std::uniform_real_distribution<float> bdist(0.4f, 3.0f);
+	std::uniform_real_distribution<float> cdist(0.0f, 1.0f);
 
 	for (auto i = 0; i < 60; i++)
 	{
 		dCubes.push_back(std::make_unique<DancingCube>(
-			wnd.Gfx(), rng, adist,
-			ddist, odist, rdist, bdist
+			wnd.Gfx(), rng, adist, ddist,
+			odist, rdist, bdist, cdist
 			));
 	}
 

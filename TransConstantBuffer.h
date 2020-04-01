@@ -7,7 +7,7 @@
 class TransConstantBuffer: public Bindable
 {
 public:
-	TransConstantBuffer(Graphics& gfx, const Drawable& parent);
+	TransConstantBuffer(Graphics& gfx, const Drawable& parent, UINT slot = 0u);
 	void Bind(Graphics& gfx) noexcept override;
 
 private:
