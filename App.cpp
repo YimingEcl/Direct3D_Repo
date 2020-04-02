@@ -23,6 +23,7 @@ App::App()
 
 	//cube = std::make_unique<Box>(wnd.Gfx());
 	//sphere = std::make_unique<SolidSphere>(wnd.Gfx(), 15, 15);
+	//cylinder = std::make_unique<Cylinder>(wnd.Gfx(), 18);
 
 	wnd.Gfx().SetProjection(DirectX::XMMatrixPerspectiveLH(1.0f, 9.0f / 16.0f, 1.0f, 100.0f));
 }
@@ -60,6 +61,7 @@ void App::DoFrame()
 	light.Draw(wnd.Gfx());
 	//cube->Draw(wnd.Gfx());
 	//sphere->Draw(wnd.Gfx());
+	//cylinder->Draw(wnd.Gfx());
 
 	if (ImGui::Begin("Speed Control"))
 	{
@@ -72,6 +74,7 @@ void App::DoFrame()
 	//cube->SpawnImguiWindow();
 	//sphere->Update(dt);
 	//sphere->SpawnImguiWindow();
+	//cylinder->SpawnImguiWindow();
 	light.SpawnImguiWindow();
 
 	camera.SpawnImguiWindow();

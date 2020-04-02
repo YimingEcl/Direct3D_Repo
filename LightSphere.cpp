@@ -43,10 +43,10 @@ void LightSphere::Update(float dt) noexcept
 
 void LightSphere::SetPos(XMFLOAT3 pos) noexcept
 {
-	this->pos = pos;
+	position = XMFLOAT4(pos.x, pos.y, pos.z, 1.0f);
 }
 
 DirectX::XMMATRIX LightSphere::GetTransformXM() const noexcept
 {
-	return DirectX::XMMatrixTranslation(pos.x, pos.y, pos.z);
+	return XMMatrixTranslationFromVector(XMLoadFloat4(&position));
 }

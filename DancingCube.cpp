@@ -54,7 +54,7 @@ DancingCube::DancingCube(Graphics& gfx, std::mt19937& rng,
 	{
 		alignas(16) XMFLOAT3 color;
 		float specularIntensity = 0.6f;
-		float specularPower = 30.0f;
+		float specularPower = 100.0f;
 		float padding[2] = {0.0f, 0.0f};
 	} colorConst;
 
