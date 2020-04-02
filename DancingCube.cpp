@@ -39,6 +39,17 @@ DancingCube::DancingCube(Graphics& gfx, std::mt19937& rng,
 
 	AddIndexBuffer(std::make_unique<IndexBuffer>(gfx, model.indices));
 
+	struct PSObjectCBuf
+	{
+		alignas(16) XMFLOAT3 color;
+		float specularIntensity = 0.6f;
+		float specularPower = 100.0f;
+		float padding[2] = { 0.0f, 0.0f };
+	} colorConst;
+
+	colorConst.color = materialColor;
+	AddBind(std::make_unique<PixelConstantBuffer<PSObjectCBuf>>(gfx, colorConst, 1u));
+
 	const std::vector<D3D11_INPUT_ELEMENT_DESC> ied =
 	{
 		{"Position", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0},
@@ -50,19 +61,7 @@ DancingCube::DancingCube(Graphics& gfx, std::mt19937& rng,
 
 	AddBind(std::make_unique<TransConstantBuffer>(gfx, *this));
 
-	struct PSObjectCBuf
-	{
-		alignas(16) XMFLOAT3 color;
-		float specularIntensity = 0.6f;
-		float specularPower = 100.0f;
-		float padding[2] = {0.0f, 0.0f};
-	} colorConst;
-
-	colorConst.color = materialColor;
-	AddBind(std::make_unique<PixelConstantBuffer<PSObjectCBuf>>(gfx, colorConst, 1u));
-
-	XMStoreFloat3x3(&mt, XMMatrixScaling(1.0f, 1.0f, bdist(rng))
-	);
+	XMStoreFloat3x3(&mt, XMMatrixScaling(1.0f, 1.0f, bdist(rng)));
 }
 
 void DancingCube::Update(float dt) noexcept

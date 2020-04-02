@@ -22,7 +22,7 @@ SolidSphere::SolidSphere(Graphics& gfx, int latDiv, int longDiv)
 	AddBind(std::make_unique<PixelShader>(gfx, L"SixColorPS.cso"));
 	AddIndexBuffer(std::make_unique<IndexBuffer>(gfx, model.indices));
 
-	struct ConstantBuffer2
+	struct PSConstantBuffer
 	{
 		struct
 		{
@@ -30,9 +30,9 @@ SolidSphere::SolidSphere(Graphics& gfx, int latDiv, int longDiv)
 			float g;
 			float b;
 			float a;
-		} face_colors[6];
+		} sixColor[6];
 	};
-	const ConstantBuffer2 cb2 =
+	const PSConstantBuffer constColor =
 	{
 		{
 			{ 1.0f,0.0f,0.0f },
@@ -43,7 +43,7 @@ SolidSphere::SolidSphere(Graphics& gfx, int latDiv, int longDiv)
 			{ 0.0f,1.0f,1.0f },
 		}
 	};
-	AddBind(std::make_unique<PixelConstantBuffer<ConstantBuffer2>>(gfx, cb2));
+	AddBind(std::make_unique<PixelConstantBuffer<PSConstantBuffer>>(gfx, constColor, 0u));
 
 	const std::vector<D3D11_INPUT_ELEMENT_DESC> ied =
 	{

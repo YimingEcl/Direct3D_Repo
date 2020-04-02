@@ -29,7 +29,7 @@ Box::Box(Graphics& gfx)
 			float a;
 		} sixColor[6];
 	};
-	const PSConstantBuffer cb =
+	const PSConstantBuffer constColor =
 	{
 		{
 			{ 1.0f,0.0f,0.0f },
@@ -40,7 +40,7 @@ Box::Box(Graphics& gfx)
 			{ 0.0f,1.0f,1.0f },
 		}
 	};
-	AddBind(std::make_unique<PixelConstantBuffer<PSConstantBuffer>>(gfx, cb));
+	AddBind(std::make_unique<PixelConstantBuffer<PSConstantBuffer>>(gfx, constColor, 0u));
 
 	const std::vector<D3D11_INPUT_ELEMENT_DESC> ied =
 	{

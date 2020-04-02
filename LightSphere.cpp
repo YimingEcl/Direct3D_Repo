@@ -24,7 +24,7 @@ LightSphere::LightSphere(Graphics& gfx)
 		XMFLOAT3 color = { 1.0f, 1.0f, 1.0f };
 		float padding = 1.0f;
 	} colorConst;
-	AddBind(std::make_unique<PixelConstantBuffer<PSConstantBuffer>>(gfx, colorConst));
+	AddBind(std::make_unique<PixelConstantBuffer<PSConstantBuffer>>(gfx, colorConst, 0u));
 
 	const std::vector<D3D11_INPUT_ELEMENT_DESC> ied =
 	{
