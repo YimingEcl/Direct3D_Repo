@@ -15,6 +15,6 @@ public:
 	XMMATRIX GetTransformXM() const noexcept override;
 
 private:
-	int longDiv;
+	int longDiv = 24;
 	XMFLOAT4 position = XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f);
 };

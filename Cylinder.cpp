@@ -1,50 +1,42 @@
 #include "Cylinder.h"
 
 Cylinder::Cylinder(Graphics& gfx, int longDiv)
+	:
+	longDiv(longDiv)
 {
 	struct Vertex
 	{
 		XMFLOAT3 pos;
+		XMFLOAT3 normal;
 	};
 
-	auto model = Prism::Make<Vertex>();
+	auto model = Prism::MakeTesselatedIndependentWithNormals<Vertex>(longDiv);
 
 	// bind to pipeline
 	AddBind(std::make_unique<VertexBuffer>(gfx, model.vertices));
 
-	auto pvs = std::make_unique<VertexShader>(gfx, L"SixColorVS.cso");
+	auto pvs = std::make_unique<VertexShader>(gfx, L"PhongVS.cso");
 	auto pvsbc = pvs->GetBlob();
 	AddBind(std::move(pvs));
 
-	AddBind(std::make_unique<PixelShader>(gfx, L"SixColorPS.cso"));
+	AddBind(std::make_unique<PixelShader>(gfx, L"PhongPS.cso"));
 	AddIndexBuffer(std::make_unique<IndexBuffer>(gfx, model.indices));
 
-	struct PSConstantBuffer
+	struct PSObjectCBuf
 	{
-		struct
-		{
-			float r;
-			float g;
-			float b;
-			float a;
-		} sixColor[6];
-	};
-	const PSConstantBuffer cb =
-	{
-		{
-			{ 1.0f,0.0f,0.0f },
-			{ 0.0f,1.0f,0.0f },
-			{ 1.0f,1.0f,0.0f },
-			{ 0.0f,0.0f,1.0f },
-			{ 1.0f,0.0f,1.0f },
-			{ 0.0f,1.0f,1.0f },
-		}
-	};
-	AddBind(std::make_unique<PixelConstantBuffer<PSConstantBuffer>>(gfx, cb));
+		alignas(16) XMFLOAT3 color;
+		float specularIntensity = 0.6f;
+		float specularPower = 100.0f;
+		float padding[2] = { 0.0f, 0.0f };
+	} colorConst;
+
+	colorConst.color = { 1.0f, 0.0f, 0.0f };
+	AddBind(std::make_unique<PixelConstantBuffer<PSObjectCBuf>>(gfx, colorConst, 1u));
 
 	const std::vector<D3D11_INPUT_ELEMENT_DESC> ied =
 	{
 		{"Position", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0},
+		{"Normal", 0, DXGI_FORMAT_R32G32B32_FLOAT ,0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0}
 	};
 	AddBind(std::make_unique<InputLayout>(gfx, ied, pvsbc));
 
