@@ -6,8 +6,6 @@
 #pragma comment(lib, "d3d11.lib")
 #pragma comment(lib, "D3DCompiler.lib")
 
-namespace dx = DirectX;
-
 // graphics exception
 Graphics::GraphicsException::GraphicsException(int line, const char* file, HRESULT hr, std::vector<std::string> infoMsgs) noexcept
 	:

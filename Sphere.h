@@ -25,15 +25,18 @@ public:
 				vertices.emplace_back();
 				XMVECTOR fin_pos = XMVector3Transform(latBase, XMMatrixRotationY(iLong * longAngle));
 				XMStoreFloat3(&vertices.back().pos, fin_pos);
+				XMStoreFloat3(&vertices.back().normal, fin_pos);
 			}
 		}
 
 		const auto iNorthPole = (unsigned short)vertices.size();
 		vertices.emplace_back();
 		XMStoreFloat3(&vertices.back().pos, base);
+		XMStoreFloat3(&vertices.back().normal, base);
 		const auto iSouthPole = (unsigned short)vertices.size();
 		vertices.emplace_back();
 		XMStoreFloat3(&vertices.back().pos, XMVectorNegate(base));
+		XMStoreFloat3(&vertices.back().normal, XMVectorNegate(base));
 
 		const int temp_lat = latDiv;
 		const int temp_long = longDiv;
@@ -85,9 +88,10 @@ public:
 
 		return { std::move(vertices),std::move(indices) };
 	}
+
 	template<class T>
 	static IndexedTriangleList<T> Make()
 	{
-		return MakeTesselated<T>(18, 18);
+		return MakeTesselated<T>(12, 24);
 	}
 };

@@ -41,7 +41,7 @@ DancingCube::DancingCube(Graphics& gfx, std::mt19937& rng,
 
 	struct PSObjectCBuf
 	{
-		alignas(16) XMFLOAT3 color;
+		alignas(16) XMFLOAT3 color = { 1.0f, 0.0f, 0.0f };
 		float specularIntensity = 0.6f;
 		float specularPower = 100.0f;
 		float padding[2] = { 0.0f, 0.0f };

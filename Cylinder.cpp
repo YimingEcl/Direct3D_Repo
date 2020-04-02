@@ -24,13 +24,12 @@ Cylinder::Cylinder(Graphics& gfx, int longDiv)
 
 	struct PSObjectCBuf
 	{
-		alignas(16) XMFLOAT3 color;
+		alignas(16) XMFLOAT3 color = { 1.0f, 0.0f, 0.0f };
 		float specularIntensity = 0.6f;
 		float specularPower = 100.0f;
 		float padding[2] = { 0.0f, 0.0f };
 	} colorConst;
 
-	colorConst.color = { 1.0f, 0.0f, 0.0f };
 	AddBind(std::make_unique<PixelConstantBuffer<PSObjectCBuf>>(gfx, colorConst, 1u));
 
 	const std::vector<D3D11_INPUT_ELEMENT_DESC> ied =
