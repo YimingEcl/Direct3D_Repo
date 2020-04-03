@@ -17,7 +17,7 @@ void PointLight::SpawnImguiWindow() noexcept
 		ImGui::SliderFloat("Y", &cbData.pos.y, -10.0f, 10.0f, "%.1f");
 		ImGui::SliderFloat("Z", &cbData.pos.z, -40.0f, 40.0f, "%.1f");
 		ImGui::Text("Intensity/Color");
-		ImGui::SliderFloat("Intensity", &cbData.diffuseIntensity, 0.01f, 2.0f, "%.2f", 2);
+		ImGui::SliderFloat("Intensity", &cbData.diffuseIntensity, 0.01f, 5.0f, "%.2f", 2);
 		ImGui::ColorEdit3("Diffuse Color", &cbData.diffuseColor.x);
 		ImGui::ColorEdit3("Ambient", &cbData.ambient.x);
 		ImGui::Text("Attenuation");

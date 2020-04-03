@@ -147,6 +147,9 @@
     <ClCompile Include="LightSphere.cpp">
       <Filter>Source Files\DrawableObjectClass</Filter>
     </ClCompile>
+    <ClCompile Include="Suzanne.cpp">
+      <Filter>Source Files\DrawableObjectClass</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -285,6 +288,9 @@
       <Filter>Header Files\DrawableObjectClass\BasicModel</Filter>
     </ClInclude>
     <ClInclude Include="Cylinder.h">
+      <Filter>Header Files\DrawableObjectClass\Custom Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Suzanne.h">
       <Filter>Header Files\DrawableObjectClass\Custom Geometry</Filter>
     </ClInclude>
   </ItemGroup>

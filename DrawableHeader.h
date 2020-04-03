@@ -6,3 +6,4 @@
 #include "SolidSphere.h"
 #include "LightSphere.h"
 #include "Cylinder.h"
+#include "Suzanne.h"
