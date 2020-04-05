@@ -39,7 +39,7 @@ LightSphere::LightSphere(Graphics& gfx)
 	AddBind(std::make_unique<TransConstantBuffer>(gfx, *this));
 }
 
-void LightSphere::Update(float dt) noexcept
+void LightSphere::Update(Graphics& gfx, float dt) noexcept
 {
 }
 
@@ -50,5 +50,6 @@ void LightSphere::SetPos(XMFLOAT3 pos) noexcept
 
 DirectX::XMMATRIX LightSphere::GetTransformXM() const noexcept
 {
-	return XMMatrixTranslationFromVector(XMLoadFloat4(&position));
+	return XMMatrixScalingFromVector(XMLoadFloat4(&scaling))*
+		XMMatrixTranslationFromVector(XMLoadFloat4(&position));
 }

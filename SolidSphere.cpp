@@ -23,14 +23,7 @@ SolidSphere::SolidSphere(Graphics& gfx, int latDiv, int longDiv)
 	AddBind(std::make_unique<PixelShader>(gfx, L"PhongPS.cso"));
 	AddIndexBuffer(std::make_unique<IndexBuffer>(gfx, model.indices));
 
-	struct PSObjectCBuf
-	{
-		alignas(16) XMFLOAT3 color = { 1.0f, 0.0f, 0.0f };
-		float specularIntensity = 0.6f;
-		float specularPower = 100.0f;
-		float padding[2] = { 0.0f, 0.0f };
-	} colorConst;
-	AddBind(std::make_unique<PixelConstantBuffer<PSObjectCBuf>>(gfx, colorConst, 1u));
+	AddBind(std::make_unique<objectCBuf>(gfx, colorConst, 1u));
 
 	const std::vector<D3D11_INPUT_ELEMENT_DESC> ied =
 	{
@@ -58,6 +51,10 @@ void SolidSphere::SpawnImguiWindow() noexcept
 		ImGui::SliderAngle("X", &rotation.x, -180.0f, 180.0f); //roll
 		ImGui::SliderAngle("Y", &rotation.y, -180.0f, 180.0f); //pitch
 		ImGui::SliderAngle("Z", &rotation.z, -180.0f, 180.0f); //yaw
+		ImGui::Text("Specular/Color");
+		ImGui::SliderFloat("Intensity", &colorConst.specularIntensity, 0.01f, 20.0f, "%.2f", 2);
+		ImGui::SliderFloat("Power", &colorConst.specularPower, 0.01f, 200.0f, "%.2f", 2);
+		ImGui::ColorEdit3("Diffuse Color", &colorConst.color.x);
 		if (ImGui::Button("Reset"))
 		{
 			Reset();
@@ -74,9 +71,13 @@ void SolidSphere::Reset() noexcept
 	rotation = XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f);
 }
 
-void SolidSphere::Update(float dt) noexcept
+void SolidSphere::Update(Graphics& gfx, float dt) noexcept
 {
 	scaling = XMFLOAT4(radius, radius, radius, 1.0f);
+
+	auto pConstPS = QueryBindable<objectCBuf>();
+	assert(pConstPS != nullptr);
+	pConstPS->Update(gfx, colorConst);
 }
 
 XMMATRIX SolidSphere::GetTransformXM() const noexcept

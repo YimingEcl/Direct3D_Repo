@@ -90,7 +90,7 @@ void Ground::Reset() noexcept
 	rotation.z = 0.0f;
 }
 
-void Ground::Update(float dt) noexcept
+void Ground::Update(Graphics& gfx, float dt) noexcept
 {
 }
 

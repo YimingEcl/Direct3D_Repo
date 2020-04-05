@@ -11,7 +11,7 @@ public:
 
 	void SpawnImguiWindow() noexcept;
 	void Reset() noexcept;
-	void Update(float dt) noexcept override;
+	void Update(Graphics& gfx, float dt) noexcept override;
 	XMMATRIX GetTransformXM() const noexcept override;
 
 private:

@@ -64,7 +64,7 @@ DancingCube::DancingCube(Graphics& gfx, std::mt19937& rng,
 	XMStoreFloat3x3(&mt, XMMatrixScaling(1.0f, 1.0f, bdist(rng)));
 }
 
-void DancingCube::Update(float dt) noexcept
+void DancingCube::Update(Graphics&, float dt) noexcept
 {
 	roll += droll * dt;
 	pitch += dpitch * dt;

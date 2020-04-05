@@ -11,7 +11,7 @@ public:
 		assert(latDiv >= 3);
 		assert(longDiv >= 3);
 
-		constexpr float radius = 0.5f;
+		constexpr float radius = 1.0f;
 		const float latAngle = PI / latDiv;
 		const float longAngle = 2.0f * PI / longDiv;
 		const XMVECTOR base = XMVectorSet(0.0f, radius, 0.0f, 0.0f);

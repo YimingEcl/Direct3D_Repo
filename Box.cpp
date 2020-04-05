@@ -90,7 +90,7 @@ void Box::Reset() noexcept
 	rotation.z = 0.0f;
 }
 
-void Box::Update(float dt) noexcept
+void Box::Update(Graphics& gfx, float dt) noexcept
 {
 }
 

@@ -36,7 +36,7 @@ void PointLight::SpawnImguiWindow() noexcept
 void PointLight::Reset() noexcept
 {
 	cbData = {
-	{ 0.0f,0.0f,0.0f },
+	{ -3.0f,2.0f,-5.0f },
 	{ 0.05f,0.05f,0.05f },
 	{ 1.0f,1.0f,1.0f },
 	1.0f,

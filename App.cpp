@@ -13,18 +13,20 @@ App::App()
 	std::uniform_real_distribution<float> bdist(0.4f, 3.0f);
 	std::uniform_real_distribution<float> cdist(0.0f, 1.0f);
 
-	for (auto i = 0; i < 80; i++)
-	{
-		dCubes.push_back(std::make_unique<DancingCube>(
-			wnd.Gfx(), rng, adist, ddist,
-			odist, rdist, bdist, cdist
-			));
-	}
+	// dancing cube
+	//for (auto i = 0; i < 80; i++)
+	//{
+	//	dCubes.push_back(std::make_unique<DancingCube>(
+	//		wnd.Gfx(), rng, adist, ddist,
+	//		odist, rdist, bdist, cdist
+	//		));
+	//}
 
+	// initialize object
 	//cube = std::make_unique<Box>(wnd.Gfx());
 	suzanne = std::make_unique<Suzanne>(wnd.Gfx());
-	//sphere = std::make_unique<SolidSphere>(wnd.Gfx(), 15, 15);
-	//cylinder = std::make_unique<Cylinder>(wnd.Gfx(), 18);
+	sphere = std::make_unique<SolidSphere>(wnd.Gfx(), 15, 15);
+	cylinder = std::make_unique<Cylinder>(wnd.Gfx(), 18);
 
 	wnd.Gfx().SetProjection(DirectX::XMMatrixPerspectiveLH(1.0f, 9.0f / 16.0f, 1.0f, 100.0f));
 }
@@ -53,15 +55,17 @@ void App::DoFrame()
 	wnd.Gfx().SetCamera(camera.GetMatrix());
 	light.Bind(wnd.Gfx(), camera.GetMatrix());
 
-	for (auto& b : dCubes)
-	{
-		b->Update(wnd.kbd.KeyIsPressed(VK_SPACE) ? 0.0f : dt);
-		b->Draw(wnd.Gfx());
-	}
+	// dancing cube
+	//for (auto& b : dCubes)
+	//{
+	//	b->Update(wnd.Gfx(), wnd.kbd.KeyIsPressed(VK_SPACE) ? 0.0f : dt);
+	//	b->Draw(wnd.Gfx());
+	//}
 
+	// draw object
 	//cube->Draw(wnd.Gfx());
-	//sphere->Draw(wnd.Gfx());
-	//cylinder->Draw(wnd.Gfx());
+	sphere->Draw(wnd.Gfx());
+	cylinder->Draw(wnd.Gfx());
 	suzanne->Draw(wnd.Gfx());
 
 	light.Draw(wnd.Gfx()); // light must be drawn at the end.
@@ -74,14 +78,18 @@ void App::DoFrame()
 	}
 	ImGui::End();
 
-	//cube->SpawnImguiWindow();
-	//sphere->Update(dt);
-	//sphere->SpawnImguiWindow();
-	//cylinder->SpawnImguiWindow();
-	suzanne->SpawnImguiWindow();
-	light.SpawnImguiWindow();
+	// update
+	sphere->Update(wnd.Gfx(), dt);
+	cylinder->Update(wnd.Gfx(), dt);
+	suzanne->Update(wnd.Gfx(), dt);
 
+	// control
+	//cube->SpawnImguiWindow();
+	sphere->SpawnImguiWindow();
+	cylinder->SpawnImguiWindow();
+	suzanne->SpawnImguiWindow();
 	camera.SpawnImguiWindow();
+	light.SpawnImguiWindow();
 
 	// present 
 	wnd.Gfx().EndFrame();
