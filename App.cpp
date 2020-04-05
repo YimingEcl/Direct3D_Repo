@@ -24,9 +24,9 @@ App::App()
 
 	// initialize object
 	//cube = std::make_unique<Box>(wnd.Gfx());
-	suzanne = std::make_unique<Suzanne>(wnd.Gfx());
+	//suzanne = std::make_unique<Suzanne>(wnd.Gfx());
 	sphere = std::make_unique<SolidSphere>(wnd.Gfx(), 15, 15);
-	cylinder = std::make_unique<Cylinder>(wnd.Gfx(), 18);
+	//cylinder = std::make_unique<Cylinder>(wnd.Gfx(), 18);
 
 	wnd.Gfx().SetProjection(DirectX::XMMatrixPerspectiveLH(1.0f, 9.0f / 16.0f, 1.0f, 100.0f));
 }
@@ -65,8 +65,8 @@ void App::DoFrame()
 	// draw object
 	//cube->Draw(wnd.Gfx());
 	sphere->Draw(wnd.Gfx());
-	cylinder->Draw(wnd.Gfx());
-	suzanne->Draw(wnd.Gfx());
+	//cylinder->Draw(wnd.Gfx());
+	//suzanne->Draw(wnd.Gfx());
 
 	light.Draw(wnd.Gfx()); // light must be drawn at the end.
 
@@ -80,14 +80,15 @@ void App::DoFrame()
 
 	// update
 	sphere->Update(wnd.Gfx(), dt);
-	cylinder->Update(wnd.Gfx(), dt);
-	suzanne->Update(wnd.Gfx(), dt);
+	//cylinder->Update(wnd.Gfx(), dt);
+	//suzanne->Update(wnd.Gfx(), dt);
 
 	// control
 	//cube->SpawnImguiWindow();
 	sphere->SpawnImguiWindow();
-	cylinder->SpawnImguiWindow();
-	suzanne->SpawnImguiWindow();
+	//cylinder->SpawnImguiWindow();
+	//suzanne->SpawnImguiWindow();
+
 	camera.SpawnImguiWindow();
 	light.SpawnImguiWindow();
 
