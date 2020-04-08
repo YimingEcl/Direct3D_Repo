@@ -44,13 +44,13 @@ void SolidSphere::SpawnImguiWindow() noexcept
 		ImGui::Text("Basic");
 		ImGui::SliderFloat("Radius", &radius, 0.5f, 20.0f, "%.1f");
 		ImGui::Text("Position");
-		ImGui::SliderFloat("Pos_X", &position.x, -20.0f, 20.0f, "%.1f");
-		ImGui::SliderFloat("Pos_Y", &position.y, -20.0f, 20.0f, "%.1f");
-		ImGui::SliderFloat("Pos_Z", &position.z, -20.0f, 20.0f, "%.1f");
+		ImGui::SliderFloat("P_X", &position.x, -20.0f, 20.0f, "%.1f");
+		ImGui::SliderFloat("P_Y", &position.y, -20.0f, 20.0f, "%.1f");
+		ImGui::SliderFloat("P_Z", &position.z, -20.0f, 20.0f, "%.1f");
 		ImGui::Text("Rotation");
-		ImGui::SliderAngle("X", &rotation.x, -180.0f, 180.0f); //roll
-		ImGui::SliderAngle("Y", &rotation.y, -180.0f, 180.0f); //pitch
-		ImGui::SliderAngle("Z", &rotation.z, -180.0f, 180.0f); //yaw
+		ImGui::SliderAngle("R_X", &rotation.x, -180.0f, 180.0f); //roll
+		ImGui::SliderAngle("R_Y", &rotation.y, -180.0f, 180.0f); //pitch
+		ImGui::SliderAngle("R_Z", &rotation.z, -180.0f, 180.0f); //yaw
 		ImGui::Text("Specular/Color");
 		ImGui::SliderFloat("Intensity", &colorConst.specularIntensity, 0.01f, 20.0f, "%.2f", 2);
 		ImGui::SliderFloat("Power", &colorConst.specularPower, 0.01f, 200.0f, "%.2f", 2);
@@ -65,6 +65,10 @@ void SolidSphere::SpawnImguiWindow() noexcept
 
 void SolidSphere::Reset() noexcept
 {
+	colorConst.color = { 1.0f, 0.0f, 0.0f };
+	colorConst.specularIntensity = 0.6f;
+	colorConst.specularPower = 100.0f;
+
 	radius = 1.0f;
 	scaling = XMFLOAT4(radius, radius, radius, 1.0f);
 	position = XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f);
@@ -74,7 +78,6 @@ void SolidSphere::Reset() noexcept
 void SolidSphere::Update(Graphics& gfx, float dt) noexcept
 {
 	scaling = XMFLOAT4(radius, radius, radius, 1.0f);
-
 	auto pConstPS = QueryBindable<objectCBuf>();
 	assert(pConstPS != nullptr);
 	pConstPS->Update(gfx, colorConst);

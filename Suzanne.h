@@ -2,9 +2,6 @@
 
 #include "BindableHeader.h"
 #include "Drawable.h"
-#include <assimp/Importer.hpp>
-#include <assimp/scene.h>
-#include <assimp/postprocess.h>
 
 class Suzanne : public Drawable
 {

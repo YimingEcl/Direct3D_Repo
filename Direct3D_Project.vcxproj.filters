@@ -135,9 +135,6 @@
     <ClCompile Include="SolidSphere.cpp">
       <Filter>Source Files\DrawableObjectClass</Filter>
     </ClCompile>
-    <ClCompile Include="Ground.cpp">
-      <Filter>Source Files\DrawableObjectClass</Filter>
-    </ClCompile>
     <ClCompile Include="PointLight.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -275,9 +272,6 @@
     <ClInclude Include="Plane.h">
       <Filter>Header Files\DrawableObjectClass\BasicModel</Filter>
     </ClInclude>
-    <ClInclude Include="Ground.h">
-      <Filter>Header Files\DrawableObjectClass\Custom Geometry</Filter>
-    </ClInclude>
     <ClInclude Include="LightSphere.h">
       <Filter>Header Files\DrawableObjectClass\Custom Geometry</Filter>
     </ClInclude>
@@ -306,12 +300,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="SIxColorPS.hlsl">
-      <Filter>Shader</Filter>
-    </FxCompile>
-    <FxCompile Include="SixColorVS.hlsl">
-      <Filter>Shader</Filter>
-    </FxCompile>
     <FxCompile Include="LightPS.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>

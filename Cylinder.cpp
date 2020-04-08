@@ -62,6 +62,10 @@ void Cylinder::SpawnImguiWindow() noexcept
 
 void Cylinder::Reset() noexcept
 {
+	colorConst.color = { 1.0f, 0.0f, 0.0f };
+	colorConst.specularIntensity = 0.6f;
+	colorConst.specularPower = 100.0f;
+
 	position = XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f);
 }
 

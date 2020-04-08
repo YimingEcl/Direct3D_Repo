@@ -83,8 +83,12 @@ void Suzanne::SpawnImguiWindow() noexcept
 
 void Suzanne::Reset() noexcept
 {
+	colorConst.color = { 1.0f, 0.0f, 0.0f };
+	colorConst.specularIntensity = 0.6f;
+	colorConst.specularPower = 100.0f;
+
 	position = XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f);
-	rotation = XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f);
+	rotation = XMFLOAT4(0.0f, PI, 0.0f, 1.0f);
 }
 
 void Suzanne::Update(Graphics& gfx, float dt) noexcept
