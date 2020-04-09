@@ -90,6 +90,7 @@ void App::DoFrame()
 	//sphere->SpawnImguiWindow();
 	//cylinder->SpawnImguiWindow();
 	//suzanne->SpawnImguiWindow();
+	model->SpawnImguiWindow();
 
 	camera.SpawnImguiWindow();
 	light.SpawnImguiWindow();
