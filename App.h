@@ -33,5 +33,6 @@ private:
 	std::unique_ptr<Cylinder> cylinder;
 	std::unique_ptr<Suzanne> suzanne;
 	std::vector<std::unique_ptr<DancingCube>> dCubes;
+	std::unique_ptr<Model> model;
 	float speed_factor = 1.0f;
 };

@@ -147,6 +147,9 @@
     <ClCompile Include="Suzanne.cpp">
       <Filter>Source Files\DrawableObjectClass</Filter>
     </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -285,6 +288,9 @@
       <Filter>Header Files\DrawableObjectClass\Custom Geometry</Filter>
     </ClInclude>
     <ClInclude Include="Suzanne.h">
+      <Filter>Header Files\DrawableObjectClass\Custom Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
       <Filter>Header Files\DrawableObjectClass\Custom Geometry</Filter>
     </ClInclude>
   </ItemGroup>

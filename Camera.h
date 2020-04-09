@@ -10,7 +10,7 @@ public:
 	void Reset() noexcept;
 
 private:
-	float r = 20.0f;
+	float r = 50.0f;
 	float theta = 0.0f;
 	float phi = 0.0f;
 	float pitch = 0.0f;
